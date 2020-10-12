@@ -1,0 +1,383 @@
+# _______       _________    ___  ___       _____           ________  ___     
+#|\  ___ \     |\___   ___\ |\  \|\  \     / __  \         |\  _____\|\  \    
+#\ \   __/|    \|___ \  \_| \ \  \\\  \   |\/_|\  \        \ \  \__/ \ \  \   
+# \ \  \_|/__       \ \  \   \ \   __  \  \|/ \ \  \        \ \   __\ \ \  \  
+#  \ \  \_|\ \       \ \  \   \ \  \ \  \      \ \  \  ___   \ \  \_|  \ \  \ 
+#   \ \_______\       \ \__\   \ \__\ \__\      \ \__\|\__\   \ \__\    \ \__\
+#    \|_______|        \|__|    \|__|\|__|       \|__|\|__|    \|__|     \|__|
+#
+#
+#
+# Author: Joonas Kärkkäinen <group55@eth1.fi>
+# License: GNU
+#
+#
+# i3 config file version 2.0
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+#
+#
+#   ____       __                       __   __              
+#  / __/ ___  / /_       __ _  ___  ___/ /  / /__ ___   __ __
+# _\ \  / -_)/ __/      /  ' \/ _ \/ _  /  /  '_// -_) / // /
+#/___/  \__/ \__/      /_/_/_/\___/\_,_/  /_/\_\ \__/  \_, / 
+#                                                     /___/ 
+set $mod Mod4
+
+
+#    ____               __       
+#   / __/____   ____   / /_ _____
+#  / /_ / __ \ / __ \ / __// ___/
+# / __// /_/ // / / // /_ (__  ) 
+#/_/   \____//_/ /_/ \__//____/  
+#                                
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Jua 11
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+#     __ _             __                               ___ _      
+# ___/ /(_)___  ___   / /___ _ __ __  ____ ___   ___   / _/(_)___ _
+#/ _  // /(_-< / _ \ / // _ `// // / / __// _ \ / _ \ / _// // _ `/
+#\_,_//_//___// .__//_/ \_,_/ \_, /  \__/ \___//_//_//_/ /_/ \_, / 
+#            /_/             /___/                          /___/  
+#
+# xrandr dualmonitor setup
+#exec xrandr --output HDMI1 --auto --right-of HDMI2
+exec xrandr --output HDMI1 --mode 1920x1080 --rate 60 --right-of HDMI2 --mode 1920x1080 --rate 75
+
+#   _  __      __                      __  
+#  / |/ /___  / /_ _    __ ___   ____ / /__
+# /    // -_)/ __/| |/|/ // _ \ / __//  '_/
+#/_/|_/ \__/ \__/ |__,__/ \___//_/  /_/\_\ 
+#                                                                
+#
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+#exec --no-startup-id nm-applet
+
+#   ___            __ _     
+#  / _ | __ __ ___/ /(_)___ 
+# / __ |/ // // _  // // _ \
+#/_/ |_|\_,_/ \_,_//_/ \___/
+#                           
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# _      __   _            __                  
+#| | /| / /  (_)  ___  ___/ / ___  _    __  ___
+#| |/ |/ /  / /  / _ \/ _  / / _ \| |/|/ / (_-<
+#|__/|__/  /_/  /_//_/\_,_/  \___/|__,__/ /___/
+#
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+odiaeresis focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+odiaeresis move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+shift+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# scratchpad move/show
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# hide windows title bar
+#for_window [class="^.*"] border pixel 1
+#new_window 1pixel
+
+# Gaps size
+gaps inner 7
+gaps outer 0
+
+# No border
+new_window none
+
+
+#                     __                               
+# _    __ ___   ____ / /__ ___  ___  ___ _ ____ ___  ___
+#| |/|/ // _ \ / __//  '_/(_-< / _ \/ _ `// __// -_)(_-<
+#|__,__/ \___//_/  /_/\_\/___// .__/\_,_/ \__/ \__//___/
+#                            /_/                        
+# 
+#Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws_shell  1:
+set $ws_web    2:
+set $ws_msg    3:逸
+set $ws_dev    4:
+set $ws_txt    5:
+set $ws_music  6:
+set $ws_files  7:
+set $ws8       8:
+set $ws9       9:
+
+
+## Assign section
+assign [title="kitty"]  → $ws_shell
+assign [class="firefox"]  → $ws_web
+assign [title="Telegram"]        → $ws_msg
+assign [class="Double Commander"] → $format = "%Y-%m-%d %H:%M:%S"ws_files
+assign [class="Thunar"]  → $ws_files
+
+# switch to workspace
+bindsym $mod+1 workspace $ws_shell
+bindsym $mod+2 workspace $ws_web
+bindsym $mod+3 workspace $ws_msg
+bindsym $mod+4 workspace $ws_dev
+bindsym $mod+5 workspace $ws_txt
+bindsym $mod+6 workspace $ws_music
+bindsym $mod+7 workspace $ws_files
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move to workspace $ws_shell
+bindsym $mod+Shift+2 move to workspace $ws_web
+bindsym $mod+Shift+3 move to workspace $ws_msg
+bindsym $mod+Shift+4 move to workspace $ws_dev
+bindsym $mod+Shift+5 move to workspace $ws_txt
+bindsym $mod+Shift+6 move to workspace $ws_music
+bindsym $mod+Shift+7 move to workspace $ws_files
+bindsym $mod+Shift+8 move to workspace $ws8
+bindsym $mod+Shift+9 move to workspace $ws9
+
+# Move workspace between outputs
+bindsym $mod+Ctrl+$left_key  move workspace to output left
+bindsym $mod+Ctrl+$down_key  move workspace to output down
+bindsym $mod+Ctrl+$up_key    move workspace to output up
+bindsym $mod+Ctrl+$right_key move workspace to output right
+
+# Assign workspaces to output
+
+# Primary display
+workspace "$ws_shell" output HDMI1
+workspace "$ws_web" output HDMI1
+workspace "$ws_msg" output HDMI1
+workspace "$ws_dev" output HDMI1
+workspace "$ws_files" output HDMI1
+
+
+# Second display
+workspace "$ws_txt" output HDMI2
+workspace "$ws_music" output HDMI2
+
+# Set workspace name
+bindsym $mod+t exec i3-input -F 'rename workspace to %s' -P 'New name: '
+
+
+#   ____ __              __                                                          
+#  / __// /_ ___ _ ____ / /_ __ __ ___    ___   ____ ___  ___ _ ____ ___ _ __ _   ___
+# _\ \ / __// _ `// __// __// // // _ \  / _ \ / __// _ \/ _ `// __// _ `//  ' \ (_-<
+#/___/ \__/ \_,_//_/   \__/ \_,_// .__/ / .__//_/   \___/\_, //_/   \_,_//_/_/_//___/
+#                               /_/    /_/              /___/                        
+
+# start rofi (a program launcher)
+bindsym $mod+d exec --no-startup-id "rofi -combi-modi  drun,run,ssh -show combi -show-icons -theme material"
+bindsym $mod+Shift+d exec --no-startup-id rofi -show window
+# Other programs
+
+exec --no-startup-id /usr/bin/kitty
+exec --no-startup-id /usr/bin/firefox
+#exec --no-startup-id /usr/bin/doublecmd
+exec --no-startup-id /usr/bin/telegram-desktop
+#exec --no-startup-id /usr/bin/spotify
+exec --no-startup-id /usr/bin/code
+exec_always --no-startup-id picom
+#exec_always --no-startup-id plank
+exec --no-startup-id /usr/bin/thunar
+
+# Start polybar
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+
+#   __ __            __    _          __   
+#  / //_/___  __ __ / /   (_)___  ___/ /___
+# / ,<  / -_)/ // // _ \ / // _ \/ _  /(_-<
+#/_/|_| \__/ \_, //_.__//_//_//_/\_,_//___/
+#           /___/                          
+# 
+#reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# start double commander file manager
+bindsym $mod+shift+f exec doublecmd
+
+# start a terminal
+bindsym $mod+Return exec kitty
+
+# kill focused window
+bindsym $mod+q kill
+
+# kill a client by its X resource
+bindsym --release $mod+x exec xkill
+
+
+# 
+#
+#        __         __      __                      __           __             __ 
+#  ___  / /  __ __ / /_ ___/ /___  _    __ ___    _/_/____ ___  / /  ___  ___  / /_
+# (_-< / _ \/ // // __// _  // _ \| |/|/ // _ \ _/_/ / __// -_)/ _ \/ _ \/ _ \/ __/
+#/___//_//_/\_,_/ \__/ \_,_/ \___/|__,__//_//_//_/  /_/   \__//_.__/\___/\___/\__/ 
+
+#                                                                                  
+bindsym $mod+Shift+e exec ~/.config/i3/i3_logout/i3_logout
+
+
+#   ____                                __        __ 
+#  / __/____ ____ ___  ___  ___   ___  / /  ___  / /_
+# _\ \ / __// __// -_)/ -_)/ _ \ (_-< / _ \/ _ \/ __/
+#/___/ \__//_/   \__/ \__//_//_//___//_//_/\___/\__/
+#
+# Take screenshot
+bindsym Print exec "scrot '%d.%m.%Y_%H.%M.%S_screenshot.png' -e 'mv $f ~/screenshots/'" 
+bindsym --release Shift+Print exec --no-startup-id "mkdir -p ~/screenshots && scrot -s ~/screenshots/screenshot-%Y%m%d_%H%M%S.png"
+
+
+#  _      __       __ __                         
+# | | /| / /___ _ / // /___  ___ _ ___  ___  ____
+# | |/ |/ // _ `// // // _ \/ _ `// _ \/ -_)/ __/
+# |__/|__/ \_,_//_//_// .__/\_,_// .__/\__//_/   
+#                    /_/        /_/           
+# Set wallpaper
+exec_always feh --bg-scale ~/arch_linux.png
+
+
+# _      ___         __                         _        
+#| | /| / (_)__  ___/ /__ _    __  _______ ___ (_)__ ___ 
+#| |/ |/ / / _ \/ _  / _ \ |/|/ / / __/ -_|_-</ /_ // -_)
+#|__/|__/_/_//_/\_,_/\___/__,__/ /_/  \__/___/_//__/\__/ 
+#
+#                                                    
+# resize window (you can also use the mouse for that)
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym odiaeresis resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+#   _    ____   __                  
+#  (_)  |_  /  / /  ___ _  ____     
+# / /  _/_ <  / _ \/ _ `/ / __/     
+#/_/  /____/ /_.__/\_,_/ /_/        
+#                             
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+
+bar {
+        #status_command i3status /home/joonas/.config/i3/status.conf
+        status_command i3blocks -c /home/joonas/.config/i3/i3blocks.conf
+        colors {
+
+		separator #444444
+		background #222222
+		statusline #00b0ef
+		focused_workspace #d70a53 #d70a53 #ffffff #00b0ef
+		active_workspace #333333 #333333 #888888 #00b0ef
+		inactive_workspace #333333 #333333 #888888 #7d7d7d
+		urgent_workspace #eb709b #eb709b #ffffff #ff7066
+	}
+
+
+
+}
+client.focused #d70a53 #d70a53 #ffffff #8c0333
+client.focused_inactive #333333 #333333 #888888 #333333
+client.unfocused #333333 #333333 #888888 #333333
+client.urgent #eb709b #eb709b #ffffff #eb709b
+
+
+#   __  ___   _           
+#  /  |/  /  (_)  ___ ____
+# / /|_/ /  / /  (_-</ __/
+#/_/  /_/  /_/  /___/\__/ 
+#                        
+
+# Turn off annoying beep
+exec xset b off
+
+
+
+
+
