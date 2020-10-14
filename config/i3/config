@@ -9,7 +9,7 @@
 #
 #
 # Author: Joonas Kärkkäinen <group55@eth1.fi>
-# License: MIT
+# License: GNU
 #
 #
 # i3 config file version 2.0
@@ -274,6 +274,8 @@ bindsym $mod+q kill
 bindsym --release $mod+x exec xkill
 
 
+
+
 # 
 #
 #        __         __      __                      __           __             __ 
@@ -377,7 +379,9 @@ client.urgent #eb709b #eb709b #ffffff #eb709b
 # Turn off annoying beep
 exec xset b off
 
+# Capslock & Numlock Key indicators
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 
-
-
-
+# Numlock status on login (numlockx is needed)
+exec_always --no-startup-id numlockx on
