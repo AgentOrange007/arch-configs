@@ -100,6 +100,8 @@ source $ZSH/oh-my-zsh.sh
 
 neofetch
 toilet -f lcd tmi eth1
+alias vi='vim'
+#tty-clock -S -c -x -s -C4 -B
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
