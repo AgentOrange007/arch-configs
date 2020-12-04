@@ -1,0 +1,6 @@
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+127.0.0.1	localhost
+::1		localhost
+127.0.0.1	cave.canvas.eth1.fi	cave
+0.0.0.0 get.code-industry.net
